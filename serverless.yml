@@ -4,14 +4,14 @@ custom:
   myEnvironment:
     dev:
       elastic_host:
-        https://vpc-diagnal-test-f5o3djyk46jzefqlm5ea7m5ac4.ap-south-1.es.amazonaws.com
+        https://vpc-diagnal-***-1.es.amazonaws.com
       redis_host:
-        redis://diagnal-cache.sohlr0.ng.0001.aps1.cache.amazonaws.com:6379
+        redis://diagnal-***.0001.aps1.cache.amazonaws.com:6379
       vpc:
         security_group:
-          sg-2cab9c4c
+          sg-2cab9***
         subnet_id1:
-          subnet-9697f1da
+          subnet-9697f***
 provider:
   name: aws
   runtime: nodejs12.x
