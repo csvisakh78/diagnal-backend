@@ -1,4 +1,4 @@
-# Diagnal-Backend
+# Diagnal Backend Service
 <b/>Nodejs Application for test</b>
 
  =>  Followed AWS Serverless architecture 
