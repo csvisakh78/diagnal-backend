@@ -9,5 +9,5 @@ application for test
 => Database Used<br/>
     * ElasticSearch ( version7.1 , security - can access only from aws security group )<br/>
 => Caching Layer<br/>
-    * Redis (aws elastic cache)
+    * Redis (security - can access only from aws security group)
       
