@@ -1,7 +1,7 @@
 # Diagnal Backend Service
 <b/>Nodejs Application for test</b>
 
- =>  Followed AWS Serverless architecture 
+ =>  Followed AWS Serverless architecture <br />
  =>  Two API endpoint are there.<br />
     * Fetching contents from elasticsearch based on offset and limit (for pagination).<br />
     * Search Content based on name (first check in redis whether same keyword search result is available.<br />
