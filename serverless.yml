@@ -1,0 +1,35 @@
+service: my-express-application
+custom:
+  myStage: ${opt:stage, self:provider.stage}
+  myEnvironment:
+    dev:
+      elastic_host:
+        https://vpc-diagnal-test-f5o3djyk46jzefqlm5ea7m5ac4.ap-south-1.es.amazonaws.com
+      redis_host:
+        redis://diagnal-cache.sohlr0.ng.0001.aps1.cache.amazonaws.com:6379
+      vpc:
+        security_group:
+          sg-2cab9c4c
+        subnet_id1:
+          subnet-9697f1da
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: ap-south-1
+
+functions:
+  app:
+    handler: index.handler
+    timeout: 30
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+    vpc:
+      securityGroupIds:
+        - ${self:custom.myEnvironment.${self:custom.myStage}.vpc.security_group}
+      subnetIds:
+        - ${self:custom.myEnvironment.${self:custom.myStage}.vpc.subnet_id1}
+    environment:
+      DB_HOST: ${self:custom.myEnvironment.dev.elastic_host}
+      REDIS_HOST: ${self:custom.myEnvironment.dev.redis_host}
