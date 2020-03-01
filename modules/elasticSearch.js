@@ -20,6 +20,18 @@ module.exports = {
             });
         });
     },
+    deleteIndex: function() {
+        return new Promise(async (resolve, reject) => {
+            let conn = await this.connecttoElasticSearch();
+            elasticSearchClient.indices.delete({
+                index: 'contents',
+              }).then(function(resp) {
+                resolve({error:0});
+              }, function(err) {
+                resolve({error:1,err:err});              
+            });
+        });
+    },
     createIndex: function() {
         return new Promise(async (resolve, reject) => {
             let conn = await this.connecttoElasticSearch();
@@ -47,7 +59,7 @@ module.exports = {
     insertContent: function(contents) {
         return new Promise(async (resolve, reject) => {
             let conn = await this.connecttoElasticSearch();
-            _async.each(contents,function(content,calback){
+            _async.eachSeries(contents,function(content,calback){
                 content['added-time'] = new Date().getTime();
                 elasticSearchClient.index({  
                 index: 'contents',
@@ -112,7 +124,7 @@ module.exports = {
                         "must": [
                             {
                                 "wildcard": {
-                                    "name": "*"+keyword+"*"
+                                    "name": "*"+keyword.toLowerCase()+"*"
                                 }
                             }
                         ]
